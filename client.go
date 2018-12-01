@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-const ApiEndpoint = "https://payment.yandex.net/api/v3/"
+const ApiEndpoint = "https://payment.yandex.net/api/v3/payments/"
 
 type YandexCheckoutClient interface {
 	CreatePayment(request *CreatePaymentRequest, transactionId string) (*CreatePaymentResponse, error)
