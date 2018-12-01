@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-const ApiEndpoint = "https://payment.yandex.net/api/v3/payments/"
+const ApiEndpoint = "https://payment.yandex.net/api/v3/"
 
 type YandexCheckoutClient interface {
 	CreatePayment(request *CreatePaymentRequest, transactionId string) (*CreatePaymentResponse, error)
@@ -80,7 +80,7 @@ func (svc *ycc) sendPostJson(url string, reqObj interface{}, resObj interface{},
 
 func (svc *ycc) CreatePayment(request *CreatePaymentRequest, transactionId string) (*CreatePaymentResponse, error) {
 	resObj := &CreatePaymentResponse{}
-	err := svc.sendPostJson(svc.url, request, resObj, transactionId)
+	err := svc.sendPostJson(fmt.Sprintf("%spayments", svc.url), request, resObj, transactionId)
 	if nil != err {
 		return nil, err
 	}
