@@ -87,6 +87,8 @@ type CreatePaymentRequest struct {
 		Type string `json:"type"`
 	} `json:"payment_method_data"`
 	Confirmation Confirmation `json:"confirmation"`
+	Metadata     Metadata     `json:"metadata"`
+	Description  *string      `json:"description"`
 }
 
 type CreatePaymentResponse struct {
