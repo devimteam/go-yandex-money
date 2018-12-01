@@ -97,6 +97,7 @@ type CreatePaymentResponse struct {
 	Paid          bool          `json:"paid"`
 	Amount        Amount        `json:"amount"`
 	CreatedAt     time.Time     `json:"created_at"`
+	Confirmation  Confirmation  `json:"confirmation"`
 	Metadata      Metadata      `json:"metadata"`
 	PaymentMethod PaymentMethod `json:"payment_method"`
 }
