@@ -42,9 +42,9 @@ type Receipt struct {
 		Amount      Amount `json:"amount"`
 		VatCode     int    `json:"vat_code"` // https://kassa.yandex.ru/docs/guides/#kody-stawok-nds
 	} `json:"items"`
-	TaxSystemCode *int   `json:"tax_system_code"`
-	Phone         string `json:"phone"` // https://ru.wikipedia.org/wiki/E.164
-	Email         string
+	TaxSystemCode *int   `json:"tax_system_code,omitempty"`
+	Phone         *string `json:"phone,omitempty"` // https://ru.wikipedia.org/wiki/E.164
+	Email         *string `json:"email,omitempty"`
 }
 
 const (
@@ -87,6 +87,8 @@ type CreatePaymentRequest struct {
 		Type string `json:"type"`
 	} `json:"payment_method_data"`
 	Confirmation Confirmation `json:"confirmation"`
+	Metadata     Metadata     `json:"metadata"`
+	Description  *string      `json:"description"`
 }
 
 type CreatePaymentResponse struct {
@@ -95,6 +97,7 @@ type CreatePaymentResponse struct {
 	Paid          bool          `json:"paid"`
 	Amount        Amount        `json:"amount"`
 	CreatedAt     time.Time     `json:"created_at"`
+	Confirmation  Confirmation  `json:"confirmation"`
 	Metadata      Metadata      `json:"metadata"`
 	PaymentMethod PaymentMethod `json:"payment_method"`
 }
@@ -131,8 +134,8 @@ type PaymentResponse struct {
 type GetPaymentResponse PaymentResponse
 
 type CapturePaymentRequest struct {
-	Amount  Amount  `json:"amount"`
-	Receipt Receipt `json:"receipt"`
+	Amount  *Amount  `json:"amount,omitempty"`
+	Receipt *Receipt `json:"receipt,omitempty"`
 }
 
 type CapturePaymentResponse PaymentResponse
